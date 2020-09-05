@@ -23,6 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "license": "GPL-3.0",
+  "author": "Mikey",
   "eslintConfig": {
     "extends": "react-app"
   },
