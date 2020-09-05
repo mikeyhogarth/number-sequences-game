@@ -1,22 +1,26 @@
 import levels from "../data/levels";
 import { Action } from "./actions";
+import { Level } from "../data/levels";
 
 export interface State {
-  levels: any[];
-  completedLevels: number[];
+  levels: Level[];
+  completedLevelIndexes: number[];
 }
 
 export const initialState: State = {
   levels,
-  completedLevels: [],
+  completedLevelIndexes: [],
 };
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "COMPLETE_LEVEL":
       return {
         ...state,
-        completedLevels: [...state.completedLevels, action.payload.levelNumber],
+        completedLevelIndexes: [
+          ...state.completedLevelIndexes,
+          action.payload.levelIndex,
+        ],
       };
     default:
       return state;

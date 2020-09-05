@@ -1,27 +1,22 @@
 import React, { useContext } from "react";
+import { LevelSelectButton } from "./LevelSelectButton";
 import { StoreContext } from "../state/store";
-import { completeLevel } from "../state/actions";
 
 export const LevelSelect = () => {
   const {
-    state: { levels, completedLevels },
-    dispatch,
+    state: { levels, completedLevelIndexes },
   } = useContext(StoreContext);
+
   return (
     <div>
       <h2>Level Select</h2>
       <ul>
-        {levels.map((level, levelNumber) => (
-          <li>
-            <button
-              style={{ display: "inline-block" }}
-              onClick={(e) => dispatch(completeLevel(levelNumber))}
-            >
-              {levelNumber}
-            </button>
-            <span>
-              {completedLevels.includes(levelNumber) && level.join(", ")}
-            </span>
+        {levels.map((level, idx) => (
+          <li key={idx}>
+            <LevelSelectButton
+              levelIndex={idx}
+              isCompleted={completedLevelIndexes.includes(idx)}
+            />
           </li>
         ))}
       </ul>

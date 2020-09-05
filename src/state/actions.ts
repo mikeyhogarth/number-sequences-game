@@ -4,12 +4,12 @@ export interface Action {
 }
 
 export interface Payload {
-  levelNumber: number;
+  levelIndex: number;
 }
 
 /**
  * Action Creators
  */
-export function completeLevel(levelNumber: number): Action {
-  return { type: "COMPLETE_LEVEL", payload: { levelNumber } };
+export function completeLevel(levelIndex: number): Action {
+  return { type: "COMPLETE_LEVEL", payload: { levelIndex } };
 }

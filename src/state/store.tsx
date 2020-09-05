@@ -10,11 +10,7 @@ const StoreContext = createContext<{
   dispatch: () => null,
 });
 
-type Props = {
-  children: React.ReactChild;
-};
-
-const StoreProvider = ({ children }: Props) => {
+const StoreProvider = ({ children }: { children: React.ReactChild }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
