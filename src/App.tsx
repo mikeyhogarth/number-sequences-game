@@ -2,16 +2,14 @@ import React from "react";
 import { StoreProvider } from "./state/store";
 import { LevelSelect } from "./components/LevelSelect";
 import { Level } from "./components/Level";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   return (
     <StoreProvider>
       <Router>
         <header className="App-header">
-          <Link to="/">
-            <h1>Number Sequences Game</h1>
-          </Link>
+          <h1>Number Sequences</h1>
         </header>
         <main>
           <Switch>

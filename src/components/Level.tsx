@@ -3,6 +3,7 @@ import { StoreContext } from "../state/store";
 import { useParams } from "react-router-dom";
 import { Sequence } from "./Sequence";
 import { completeLevel } from "../state/actions";
+import { Link } from "react-router-dom";
 
 interface FormElements extends HTMLFormElement {
   guess: HTMLInputElement;
@@ -39,7 +40,7 @@ export const Level = () => {
       <Sequence value={level.sequence} />
       <form onSubmit={handleGuessSubmit}>
         <input name="answer" type="number" onChange={handleGuessChange} />
-        <input type="submit" value="Guess" />
+        <input className="btn btn-submit" type="submit" value="Guess" />
       </form>
 
       {lastIncorrectGuess && `Nope ${lastIncorrectGuess} is not the answer`}
@@ -50,6 +51,10 @@ export const Level = () => {
           {level.answer})
         </p>
       )}
+
+      <Link className="btn btn-back" to="/">
+        Go Back
+      </Link>
     </div>
   );
 };
