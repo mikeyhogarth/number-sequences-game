@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import { Sequence } from "./Sequence";
 import { completeLevel } from "../state/actions";
 import { Link } from "react-router-dom";
-
-interface FormElements extends HTMLFormElement {
-  guess: HTMLInputElement;
-}
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Alert from "react-bootstrap/Alert";
 
 export const Level = () => {
   const { levelIndex } = useParams();
@@ -15,11 +15,12 @@ export const Level = () => {
     dispatch,
     state: { levels, completedLevelIndexes },
   } = useContext(StoreContext);
+
   const level = levels[levelIndex];
   const [lastIncorrectGuess, setLastIncorrectGuess] = useState<number | null>();
   const [guess, setGuess] = useState<number>();
 
-  function handleGuessChange(event: React.FormEvent<HTMLInputElement>) {
+  function handleGuessChange(event: React.ChangeEvent<any>) {
     setGuess(parseInt(event.currentTarget.value));
   }
 
@@ -37,22 +38,40 @@ export const Level = () => {
   return (
     <div>
       <h1>Level {level.levelNumber}</h1>
+      <p> Which number comes next? </p>
       <Sequence value={level.sequence} />
-      <form onSubmit={handleGuessSubmit}>
-        <input name="answer" type="number" onChange={handleGuessChange} />
-        <input className="btn btn-submit" type="submit" value="Guess" />
-      </form>
 
-      {lastIncorrectGuess && `Nope ${lastIncorrectGuess} is not the answer`}
-
-      {completedLevelIndexes.includes(level.index) && (
-        <p>
-          Congratulations you have comlpeted this level! (the answer was{" "}
-          {level.answer})
-        </p>
+      <Form onSubmit={handleGuessSubmit}>
+        <InputGroup>
+          <Form.Control
+            name="answer"
+            type="number"
+            className="guess"
+            placeholder="Enter your guess..."
+            aria-label="Guess"
+            onChange={handleGuessChange}
+          />
+          <InputGroup.Append>
+            <Button as="input" type="submit" value="Guess" />
+          </InputGroup.Append>
+        </InputGroup>
+      </Form>
+      <br />
+      {lastIncorrectGuess && (
+        <Alert variant="danger">
+          Nope {lastIncorrectGuess} is not the answer
+        </Alert>
       )}
 
-      <Link className="btn btn-back" to="/">
+      {completedLevelIndexes.includes(level.index) && (
+        <Alert variant="success">
+          Congratulations you have comlpeted this level! (the answer was{" "}
+          {level.answer})
+        </Alert>
+      )}
+
+      <br />
+      <Link to="/" className="btn btn-warning">
         Go Back
       </Link>
     </div>

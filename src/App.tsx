@@ -3,20 +3,27 @@ import { StoreProvider } from "./state/store";
 import { LevelSelect } from "./components/LevelSelect";
 import { Level } from "./components/Level";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Header from "./components/Header";
 const App = () => {
   return (
     <StoreProvider>
       <Router>
-        <header className="App-header">
-          <h1>Number Sequences</h1>
-        </header>
-        <main>
-          <Switch>
-            <Route path="/" exact component={LevelSelect} />
-            <Route path="/level/:levelIndex" component={Level} />
-          </Switch>
-        </main>
+        <Header />
+        <Container>
+          <Row>
+            <Col>
+              <main>
+                <Switch>
+                  <Route path="/" exact component={LevelSelect} />
+                  <Route path="/level/:levelIndex" component={Level} />
+                </Switch>
+              </main>
+            </Col>
+          </Row>
+        </Container>
       </Router>
     </StoreProvider>
   );

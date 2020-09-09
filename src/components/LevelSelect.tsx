@@ -10,7 +10,7 @@ export const LevelSelect = () => {
   return (
     <div>
       <h2>Level Select</h2>
-      <ul>
+      <ul className="level-select">
         {levels.map((level, idx) => (
           <li key={idx}>
             <LevelSelectButton

@@ -5,5 +5,12 @@ type Props = {
 };
 
 export const Sequence = ({ value }: Props) => {
-  return <div>{<p>{value.join(", ")}</p>}</div>;
+  return (
+    <div className="sequence">
+      {value.map((n) => (
+        <span className="sequence-number">{n}</span>
+      ))}
+      <span className="sequence-number">?</span>
+    </div>
+  );
 };
