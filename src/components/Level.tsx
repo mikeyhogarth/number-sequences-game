@@ -1,40 +1,20 @@
-import React, { useContext, useState } from "react";
-import { StoreContext } from "../state/store";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { Sequence } from "./Sequence";
-import { completeLevel } from "../state/actions";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Alert from "react-bootstrap/Alert";
+import { useGuess } from "../hooks/useGuess";
+import { useLevelDetails } from "../hooks/useLevelDetails";
 
 export const Level = () => {
-  const { levelIndex } = useParams();
-  const {
-    dispatch,
-    state: { levels, completedLevelIndexes },
-  } = useContext(StoreContext);
+  const { level, completedLevelIndexes } = useLevelDetails();
 
-  const level = levels[levelIndex];
-  const [lastIncorrectGuess, setLastIncorrectGuess] = useState<number | null>();
-  const [guess, setGuess] = useState<number>();
+  const { handleGuessChange, handleGuessSubmit, lastIncorrectGuess } = useGuess(
+    level
+  );
 
-  function handleGuessChange(event: React.ChangeEvent<any>) {
-    setGuess(parseInt(event.currentTarget.value));
-  }
-
-  function handleGuessSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (guess !== level.answer) return setLastIncorrectGuess(guess);
-
-    // Guess correct!
-    setLastIncorrectGuess(null);
-    dispatch(completeLevel(level.index));
-  }
-
-  // Component
   return (
     <div>
       <h1>Level {level.levelNumber}</h1>
