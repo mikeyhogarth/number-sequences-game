@@ -7,9 +7,11 @@ export interface State {
   completedLevelIndexes: number[];
 }
 
+const progress = window.localStorage.getItem("progress");
+
 export const initialState: State = {
   levels,
-  completedLevelIndexes: [],
+  completedLevelIndexes: progress ? JSON.parse(progress) : [],
 };
 
 export const reducer = (state: State, action: Action): State => {
