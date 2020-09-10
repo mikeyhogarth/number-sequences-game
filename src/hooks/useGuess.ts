@@ -9,6 +9,15 @@ export function useGuess(level: Level) {
   const [lastIncorrectGuess, setLastIncorrectGuess] = useState<number | null>();
   const [guess, setGuess] = useState<number>();
 
+  function guessIncorrectly(guess: number | undefined) {
+    setLastIncorrectGuess(guess);
+  }
+
+  function guessCorrectly(index: number) {
+    setLastIncorrectGuess(null);
+    dispatch(completeLevel(index));
+  }
+
   function handleGuessChange(event: React.ChangeEvent<any>) {
     setGuess(parseInt(event.currentTarget.value));
   }
@@ -16,11 +25,9 @@ export function useGuess(level: Level) {
   function handleGuessSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (guess !== level.answer) return setLastIncorrectGuess(guess);
-
-    // Guess correct!
-    setLastIncorrectGuess(null);
-    dispatch(completeLevel(level.index));
+    guess !== level.answer
+      ? guessIncorrectly(guess)
+      : guessCorrectly(level.index);
   }
 
   return {

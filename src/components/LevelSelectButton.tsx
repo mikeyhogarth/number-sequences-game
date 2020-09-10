@@ -8,10 +8,11 @@ type Props = {
 
 export const LevelSelectButton = ({ levelIndex, isCompleted }: Props) => {
   return (
-    <Link to={`/level/${levelIndex}`}>
-      <span style={{ textDecoration: isCompleted ? "line-through" : "none" }}>
-        Level {levelIndex + 1}
-      </span>
+    <Link
+      className={isCompleted ? "completed" : ""}
+      to={`/level/${levelIndex}`}
+    >
+      <span>Level {levelIndex + 1}</span>
     </Link>
   );
 };

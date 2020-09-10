@@ -7,6 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Alert from "react-bootstrap/Alert";
 import { useGuess } from "../hooks/useGuess";
 import { useLevelDetails } from "../hooks/useLevelDetails";
+import Col from "react-bootstrap/Col";
 
 export const Level = () => {
   const { level, completedLevelIndexes } = useLevelDetails();
@@ -21,21 +22,24 @@ export const Level = () => {
       <p> Which number comes next? </p>
       <Sequence value={level.sequence} />
 
-      <Form onSubmit={handleGuessSubmit}>
-        <InputGroup>
-          <Form.Control
-            name="answer"
-            type="number"
-            className="guess"
-            placeholder="Enter your guess..."
-            aria-label="Guess"
-            onChange={handleGuessChange}
-          />
-          <InputGroup.Append>
-            <Button as="input" type="submit" value="Guess" />
-          </InputGroup.Append>
-        </InputGroup>
-      </Form>
+      <Col md={{ span: 6, offset: 3 }}>
+        <Form onSubmit={handleGuessSubmit}>
+          <InputGroup>
+            <Form.Control
+              name="answer"
+              type="number"
+              className="guess"
+              size="lg"
+              placeholder="Enter your guess..."
+              aria-label="Guess"
+              onChange={handleGuessChange}
+            />
+            <InputGroup.Append>
+              <Button as="input" type="submit" value="Guess" />
+            </InputGroup.Append>
+          </InputGroup>
+        </Form>
+      </Col>
       <br />
       {lastIncorrectGuess && (
         <Alert variant="danger">
