@@ -21,7 +21,7 @@ export interface Level {
 }
 
 export default levels.map(
-  (level, idx): Level => {
+  (level, idx: number): Level => {
     const sequence = level.take(10).toArray();
 
     return {
