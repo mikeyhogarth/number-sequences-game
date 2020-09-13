@@ -17,7 +17,7 @@ export const initialState: State = {
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "COMPLETE_LEVEL":
-      return action.payload.levelIndex
+      return action.payload.levelIndex !== undefined
         ? {
             ...state,
             completedLevelIndexes: [
