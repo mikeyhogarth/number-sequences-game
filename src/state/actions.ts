@@ -4,7 +4,7 @@ export interface Action {
 }
 
 export interface Payload {
-  levelIndex: number;
+  levelIndex?: number;
 }
 
 /**
@@ -12,4 +12,8 @@ export interface Payload {
  */
 export function completeLevel(levelIndex: number): Action {
   return { type: "COMPLETE_LEVEL", payload: { levelIndex } };
+}
+
+export function resetProgress(): Action {
+  return { type: "RESET_PROGRESS", payload: {} };
 }

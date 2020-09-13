@@ -17,12 +17,19 @@ export const initialState: State = {
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "COMPLETE_LEVEL":
+      return action.payload.levelIndex
+        ? {
+            ...state,
+            completedLevelIndexes: [
+              ...state.completedLevelIndexes,
+              action.payload.levelIndex,
+            ],
+          }
+        : state;
+    case "RESET_PROGRESS":
       return {
         ...state,
-        completedLevelIndexes: [
-          ...state.completedLevelIndexes,
-          action.payload.levelIndex,
-        ],
+        completedLevelIndexes: [],
       };
     default:
       return state;
