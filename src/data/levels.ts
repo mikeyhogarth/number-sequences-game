@@ -1,16 +1,29 @@
-import { Arithmetic } from "number-sequences";
+import {
+  Arithmetic,
+  Geometric,
+  Fibonacci,
+  Prime,
+  Power,
+  Triangle,
+  Twin,
+} from "number-sequences";
 
 const levels = [
   Arithmetic(1, 1),
   Arithmetic(1, 2),
   Arithmetic(2, 1),
+  Triangle(),
   Arithmetic(0, 3),
   Arithmetic(10, -1),
   Arithmetic(5, 2),
   Arithmetic(1, 8),
-  Arithmetic(4, 2),
-  Arithmetic(20, -3),
-  Arithmetic(16, 7),
+  Geometric(1, 2),
+  Geometric(2, 2),
+  Fibonacci(),
+  Prime(),
+  Power(2),
+  Twin(Arithmetic(2, 1), Arithmetic(3, 0)),
+  Twin(Geometric(2, 1), Arithmetic(3, 0)),
 ];
 
 export interface Level {
