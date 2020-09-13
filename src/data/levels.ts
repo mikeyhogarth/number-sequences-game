@@ -23,12 +23,13 @@ export interface Level {
 export default levels.map(
   (level, idx: number): Level => {
     const sequence = level.take(10).toArray();
+    const answer = sequence.pop() || 0;
 
     return {
       index: idx,
       levelNumber: idx + 1,
       sequence,
-      answer: sequence.pop(),
+      answer,
     };
   }
 );
